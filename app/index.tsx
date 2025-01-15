@@ -6,6 +6,7 @@ import {
   Image,
   StatusBar,
   ActivityIndicator,
+  useColorScheme,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
@@ -13,6 +14,7 @@ import { useFocusEffect } from "@react-navigation/native";
 const SplashScreenComponent = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const colorScheme = useColorScheme(); // Detect the current color scheme (light or dark)
 
   useFocusEffect(
     React.useCallback(() => {
@@ -27,10 +29,17 @@ const SplashScreenComponent = () => {
     }, [router]),
   );
 
+  const isDarkMode = colorScheme === "dark";
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "#171717" : "white" },
+      ]}
+    >
       <StatusBar
-        barStyle="light-content"
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
         translucent
         backgroundColor="transparent"
       />
@@ -41,14 +50,28 @@ const SplashScreenComponent = () => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.textTitle}>Morning Dew</Text>
-        <Text style={styles.tagline}>
+        <Text
+          style={[styles.textTitle, { color: isDarkMode ? "#FFF" : "#171717" }]}
+        >
+          Morning Dew
+        </Text>
+        <Text style={[styles.tagline, { color: "#FFA500" }]}>
           Your daily guide to spiritual growth and divine inspiration.
         </Text>
         {loading ? (
-          <ActivityIndicator size="large" color="#FFA500" />
+          <ActivityIndicator
+            size="large"
+            color={isDarkMode ? "#FFA500" : "#FF4500"}
+          />
         ) : (
-          <Text>Redirecting...</Text>
+          <Text
+            style={[
+              styles.redirectingText,
+              { color: isDarkMode ? "#FFF" : "#000" },
+            ]}
+          >
+            Redirecting...
+          </Text>
         )}
       </View>
     </View>
@@ -58,7 +81,6 @@ const SplashScreenComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#171717",
   },
   imageContainer: {
     flex: 1,
@@ -82,24 +104,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 30,
   },
+  textTitle: {
+    fontSize: 28,
+    textAlign: "center",
+    fontWeight: "600",
+    lineHeight: 32,
+    fontFamily: "Merri-Bold",
+    marginBottom: 8,
+  },
   tagline: {
     fontSize: 16,
-    color: "#FFA500",
     textAlign: "center",
     fontWeight: "400",
-    marginBottom: 20,
     lineHeight: 24,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    marginBottom: 20,
     fontFamily: "Merri",
   },
-  textTitle: {
-    fontSize: 24,
-    color: "#FFF",
+  redirectingText: {
+    fontSize: 16,
     textAlign: "center",
     fontWeight: "400",
-    lineHeight: 24,
-    fontFamily: "Merri-Bold",
+    fontFamily: "Merri",
   },
 });
 

@@ -1,4 +1,4 @@
-[
+export const hymns = [
   {
     id: 1,
     title: "A pilgrim was I and awand'ring",

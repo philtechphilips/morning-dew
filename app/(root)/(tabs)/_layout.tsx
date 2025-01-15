@@ -14,14 +14,14 @@ const TabIcon = ({
   title: string;
 }) => (
   <View style={{ alignItems: "center", marginTop: 20 }}>
-    <View style={{ width: 60, height: 24, marginRight: 5 }}>
+    <View style={{ width: 60, height: 24 }}>
       {React.cloneElement(icon, {
-        color: focused ? "#D85859" : "#666876", // Set color dynamically based on focus
+        color: focused ? "#FFA500" : "#FFF", // Set color dynamically based on focus
       })}
     </View>
     <Text
       style={{
-        color: focused ? "#D85859" : "#666876",
+        color: focused ? "#FFA500" : "#fff",
         width: 60,
         textAlign: "center",
         fontWeight: 500,
@@ -82,7 +82,7 @@ const TabsLayout = () => {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: "white",
+          backgroundColor: "#2a2a2a",
           position: "absolute",
           borderTopColor: "#0061FF1A",
           borderTopWidth: 1,

@@ -23,7 +23,7 @@ const SplashScreenComponent = () => {
       const timer = setTimeout(() => {
         setLoading(false);
         router.push("/home");
-      }, 5000);
+      }, 1500);
 
       return () => clearTimeout(timer);
     }, [router]),

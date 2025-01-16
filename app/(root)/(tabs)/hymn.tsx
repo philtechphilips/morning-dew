@@ -1,4 +1,5 @@
 import { hymns } from "@/constants/hymns";
+import { Link } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -33,9 +34,11 @@ const Hymn = () => {
         { backgroundColor: isDarkMode ? "#171717" : "#f5f5f5" },
       ]}
     >
-      <Text
-        style={[styles.hymnText, { color: isDarkMode ? "#fff" : "#000" }]}
-      >{`${index + 1}. ${item.title}`}</Text>
+      <Link href={`/${item.id}`} style={{ flex: 1 }}>
+        <Text
+          style={[styles.hymnTexts, { color: isDarkMode ? "#fff" : "#000" }]}
+        >{`${index + 1}. ${item.title}`}</Text>
+      </Link>
     </View>
   );
 
@@ -123,6 +126,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
+    marginTop: 10,
     position: "sticky",
     top: 0,
     zIndex: 1,
@@ -161,9 +165,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 8,
   },
-  hymnText: {
+  hymnTexts: {
     fontSize: 20,
-    fontWeight: "bold",
     fontFamily: "Merri",
   },
   hymnDetails: {
